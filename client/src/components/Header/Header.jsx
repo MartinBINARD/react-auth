@@ -1,4 +1,5 @@
-import styles from './Header.module.scss';
+import React from "react";
+import styles from "./Header.module.scss";
 import { NavLink } from "react-router-dom";
 
 function Header() {
@@ -10,9 +11,10 @@ function Header() {
         </NavLink>
       </div>
       <ul className={styles.headerList}>
-          <NavLink to="signup" className="mr-15">
-            Inscription
-          </NavLink>
+        <NavLink to="signup" className="mr-15">
+          Inscription
+        </NavLink>
+        <NavLink to="signin">Connexion</NavLink>
       </ul>
     </header>
   );
