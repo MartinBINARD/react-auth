@@ -29,4 +29,26 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.get("/current", async (req, res) => {
+  const { token } = req.cookies;
+  if (token) {
+    try {
+      const decodedToken = jsonwebtoken.verify(token, keyPub);
+      const currentUser = await UserModel.findById(decodedToken.sub)
+        .select("-password -__v")
+        .exec();
+      if (currentUser) {
+        return res.json(currentUser);
+      } else {
+        return res.json(null);
+      }
+    } catch (e) {
+      console.log(e);
+      return res.json(null);
+    }
+  } else {
+    return res.json(null);
+  }
+});
+
 module.exports = router;
